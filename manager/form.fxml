@@ -16,9 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0"
-      prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="manager.Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="filer.Controller">
     <MenuBar prefHeight="29.0" prefWidth="193.0">
         <menus>
             <Menu mnemonicParsing="false" text="File">
@@ -53,13 +51,13 @@
                     <TextField fx:id="lastName" prefHeight="27.0" prefWidth="98.0" promptText="Last Name *" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <DatePicker fx:id="dateOfLoss" prefHeight="27.0" prefWidth="245.0" promptText="Select Date of Loss *" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                     <ComboBox fx:id="damageType" onMouseClicked="#populateDamageTypes" prefHeight="27.0" prefWidth="244.0" promptText="Select Damage Type (Optional)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                    <TextField fx:id="aagNumber" promptText="AAG ... *" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <TextField fx:id="aagNumber" promptText="Enter AAG Number *" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     <Button alignment="CENTER" mnemonicParsing="false" onAction="#createFilesystem" prefHeight="27.0" prefWidth="245.0" text="Create Filesystem" GridPane.columnIndex="1" GridPane.rowIndex="5">
                         <font>
                             <Font size="12.0" />
                         </font>
                     </Button>
-               <Button mnemonicParsing="false" onAction="#clearForm" prefHeight="27.0" prefWidth="121.0" text="Clear" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clearForm" prefHeight="27.0" prefWidth="121.0" text="Clear" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
                 </children>
             </GridPane>
         </center>

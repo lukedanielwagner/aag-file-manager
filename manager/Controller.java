@@ -1,4 +1,4 @@
-package manager;
+package filer;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -59,44 +59,16 @@ public class Controller {
 
         } else {
 
-            final File rootDir = new File("/Users/lukewagner/Desktop/Files to Attorney");
+            final File rootDir = new File("E:/Computer Science/Files");
 
-            if (rootDir.canWrite()) {
+            if (rootDir.exists() && rootDir.isDirectory()) {
 
-                if (rootDir.isDirectory() && rootDir.exists()) {
-
-                    errorText.setText("Success");
-                    createClientDir(rootDir);
-
-                } else if (!rootDir.exists()) {
-
-                    errorText.setText("Creating Client Directory...");
-                    createClientDir(rootDir);
-
-                }
+                errorText.setText("Root directory located, creating filesystem...");
+                createClientDir(rootDir);
 
             } else {
 
-                errorText.setText("Root directory not found, creating root...");
-
-                try {
-
-                    rootDir.mkdir();
-                    errorText.setText("Creating Client Directory...");
-
-                    try {
-
-                        createClientDir(rootDir);
-
-                    } catch (Exception e) {
-
-                        errorText.setText("Something went wrong. " + e);
-
-                    }
-
-                } catch (Exception e) {
-
-                    errorText.setText("Something went wrong. " + e);
+                errorText.setText("Root directory could not be accessed. Contact Admin.");
 
                 }
 
@@ -104,11 +76,10 @@ public class Controller {
 
         }
 
-    }
-
     private void createClientDir(File root) {
 
         String formattedDate = dateFormat.format(dateOfLoss.getValue());
+
         File claimDir = new File(root.getPath() + "/" +
                 lastName.getText() + " " + formattedDate + " AAG " + aagNumber.getText());
 
@@ -138,7 +109,7 @@ public class Controller {
         dateOfLoss.setValue(null);
         damageType.setValue(null);
         aagNumber.setText("");
+        errorText.setText("");
 
     }
-
 }
