@@ -1,4 +1,4 @@
-package filer;
+package manager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -112,4 +112,5 @@ public class Controller {
         errorText.setText("");
 
     }
+
 }
