@@ -1,7 +1,5 @@
 package filer;
 
-//testing git
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
