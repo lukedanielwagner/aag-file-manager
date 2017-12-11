@@ -61,7 +61,7 @@ public class Controller {
 
         } else {
 
-            final File rootDir = new File("/Users/lukewagner/Desktop/Files to Attorney");
+            File rootDir = new File("E:/Computer Science/Files");
 
             if (rootDir.canWrite()) {
 
@@ -139,6 +139,7 @@ public class Controller {
         dateOfLoss.setValue(null);
         damageType.setValue(null);
         aagNumber.setText("");
+        errorText.setText("");
 
     }
 }
