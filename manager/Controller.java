@@ -1,6 +1,4 @@
-package filer;
-
-//testing git
+package manager;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -80,10 +78,12 @@ public class Controller {
             } else {
 
                 errorText.setText("Root directory not found, creating root...");
+
                 try {
 
                     rootDir.mkdir();
                     errorText.setText("Creating Client Directory...");
+
                     try {
 
                         createClientDir(rootDir);
@@ -109,7 +109,6 @@ public class Controller {
     private void createClientDir(File root) {
 
         String formattedDate = dateFormat.format(dateOfLoss.getValue());
-
         File claimDir = new File(root.getPath() + "/" +
                 lastName.getText() + " " + formattedDate + " AAG " + aagNumber.getText());
 
@@ -141,4 +140,5 @@ public class Controller {
         aagNumber.setText("");
 
     }
+
 }
