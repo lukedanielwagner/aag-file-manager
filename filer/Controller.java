@@ -59,50 +59,22 @@ public class Controller {
 
         } else {
 
-            File rootDir = new File("E:/Computer Science/Files");
+            final File rootDir = new File("E:/Computer Science/Files");
 
-            if (rootDir.canWrite()) {
+            if (rootDir.exists() && rootDir.isDirectory()) {
 
-                if (rootDir.isDirectory() && rootDir.exists()) {
-
-                    errorText.setText("Success");
-                    createClientDir(rootDir);
-
-                } else if (!rootDir.exists()) {
-
-                    errorText.setText("Creating Client Directory...");
-                    createClientDir(rootDir);
-
-                }
+                errorText.setText("Root directory located, creating filesystem...");
+                createClientDir(rootDir);
 
             } else {
 
-                errorText.setText("Root directory not found, creating root...");
-                try {
-
-                    rootDir.mkdir();
-                    errorText.setText("Creating Client Directory...");
-                    try {
-
-                        createClientDir(rootDir);
-
-                    } catch (Exception e) {
-
-                        errorText.setText("Something went wrong. " + e);
-
-                    }
-
-                } catch (Exception e) {
-
-                    errorText.setText("Something went wrong. " + e);
+                errorText.setText("Root directory could not be accessed. Contact Admin.");
 
                 }
 
             }
 
         }
-
-    }
 
     private void createClientDir(File root) {
 
