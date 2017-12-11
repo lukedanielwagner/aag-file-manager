@@ -40,7 +40,7 @@ public class Controller {
     private TextField aagNumber;
 
     @FXML
-    private TextField errorText;
+    private TextField status;
 
     final private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM.dd.yyyy");
 
@@ -55,7 +55,7 @@ public class Controller {
 
         if(lastName.getText() == null || dateOfLoss.getValue() == null || aagNumber.getText() == null) {
 
-            errorText.setText("Please fill in the required fields denotated by '*'.");
+            status.setText("Please fill in the required fields denotated by '*'.");
 
         } else {
 
@@ -63,12 +63,12 @@ public class Controller {
 
             if (rootDir.exists() && rootDir.isDirectory()) {
 
-                errorText.setText("Root directory located, creating filesystem...");
+                status.setText("Root directory located, creating filesystem...");
                 createClientDir(rootDir);
 
             } else {
 
-                errorText.setText("Root directory could not be accessed. Contact Admin.");
+                status.setText("Root directory could not be accessed. Contact Admin.");
 
                 }
 
@@ -86,11 +86,11 @@ public class Controller {
         try {
 
             claimDir.mkdir();
-            errorText.setText("Filesystem created successfully.");
+            status.setText("Filesystem created successfully.");
 
         } catch (Exception e) {
 
-            errorText.setText("Something went wrong. " + e);
+            status.setText("Something went wrong. " + e);
 
         }
 
@@ -109,7 +109,7 @@ public class Controller {
         dateOfLoss.setValue(null);
         damageType.setValue(null);
         aagNumber.setText("");
-        errorText.setText("");
+        status.setText("");
 
     }
 
