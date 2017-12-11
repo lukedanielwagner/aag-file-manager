@@ -66,11 +66,15 @@ public class Controller {
                 status.setText("Root directory located, creating filesystem...");
                 createClientDir(rootDir);
 
-            } else {
+            } else if(!rootDir.canWrite()){
 
                 status.setText("Root directory could not be accessed. Contact Admin.");
 
-                }
+            } else {
+
+                status.setText("Something went wrong. Contact Admin.");
+
+            }
 
             }
 
@@ -104,12 +108,12 @@ public class Controller {
 
     public void clearForm(ActionEvent actionEvent) {
 
-        firstName.setText("");
-        lastName.setText("");
+        firstName.setText(null);
+        lastName.setText(null);
         dateOfLoss.setValue(null);
         damageType.setValue(null);
-        aagNumber.setText("");
-        status.setText("");
+        aagNumber.setText(null);
+        status.setText(null);
 
     }
 
