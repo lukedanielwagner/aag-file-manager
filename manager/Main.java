@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    /*
+    get hacked noob
+     */
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
