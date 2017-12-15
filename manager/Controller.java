@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
 
@@ -126,25 +127,16 @@ public class Controller {
 
         Dragboard dragboard = dragEvent.getDragboard();
         if(dragboard.hasFiles()) {
-
-            for(int i =0; i < dragboard.getFiles().size(); i++) {
-
-
-
-            }
-
+            sortFiles(dragboard.getFiles());
         }
 
     }
 
-    void sortFile(File file) {
+    void sortFiles(List<File> files) {
 
-        if(file != null) {
-
-
-
+        for(File file : files) {
+            // sort code here
         }
-
     }
 
 }
