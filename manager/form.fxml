@@ -19,11 +19,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manager.Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manager.Controller">
     <MenuBar prefHeight="29.0" prefWidth="193.0">
         <menus>
             <Menu mnemonicParsing="false" text="File">
                 <items>
+               <MenuItem mnemonicParsing="false" onAction="#chooseFiles" text="Choose Files..." />
                     <MenuItem mnemonicParsing="false" onAction="#exit" text="Close" />
                 </items>
             </Menu>
@@ -59,7 +60,7 @@
                                 <DatePicker fx:id="dateOfLoss" prefHeight="27.0" prefWidth="245.0" promptText="Select Date of Loss *" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                 <ComboBox fx:id="damageType" onMouseClicked="#populateDamageTypes" prefHeight="27.0" prefWidth="244.0" promptText="Select Damage Type (Optional)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                 <TextField fx:id="aagNumber" promptText="Enter AAG Number *" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                <Button alignment="CENTER" mnemonicParsing="false" onAction="#createFilesystem" prefHeight="27.0" prefWidth="245.0" text="Create Filesystem" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleCreateButton" prefHeight="27.0" prefWidth="245.0" text="Create Filesystem" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                     <font>
                                         <Font size="12.0" />
                                     </font>
@@ -79,12 +80,12 @@
          </Tab>
        <Tab text="Files">
             <content>
-               <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <BorderPane onDragDetected="#handleDragOver" onDragDropped="#handleDragDrop" prefHeight="200.0" prefWidth="200.0">
                   <center>
                      <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" opacity="0.5" prefHeight="117.0" prefWidth="297.0" text="Drag and Drop Files here... " textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER" />
                   </center>
                   <bottom>
-                     <Label alignment="TOP_CENTER" opacity="0.5" prefHeight="106.0" prefWidth="269.0" text="(or add files by selecting File &gt; Add files...)" BorderPane.alignment="CENTER" />
+                     <Label alignment="TOP_CENTER" opacity="0.5" prefHeight="106.0" prefWidth="269.0" text="(or add files by selecting File &gt; Choose files...)" BorderPane.alignment="CENTER" />
                   </bottom>
                </BorderPane>
             </content>
