@@ -7,11 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Controller {
 
@@ -23,6 +26,8 @@ public class Controller {
             "Wind"
 
     );
+
+    private final ArrayList<String> imgFileTypes = new ArrayList<>();
 
     @FXML
     private TextField firstName;
@@ -114,6 +119,31 @@ public class Controller {
         damageType.setValue(null);
         aagNumber.setText(null);
         status.setText(null);
+
+    }
+
+    public void handleDragDrop(DragEvent dragEvent) {
+
+        Dragboard dragboard = dragEvent.getDragboard();
+        if(dragboard.hasFiles()) {
+
+            for(int i =0; i < dragboard.getFiles().size(); i++) {
+
+
+
+            }
+
+        }
+
+    }
+
+    void sortFile(File file) {
+
+        if(file != null) {
+
+
+
+        }
 
     }
 

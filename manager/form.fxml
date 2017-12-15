@@ -34,7 +34,7 @@
      <tabs>
        <Tab text="Information">
             <content>
-                <BorderPane prefHeight="277.0" prefWidth="400.0">
+                <BorderPane onDragDropped="#handleDragDrop" prefHeight="277.0" prefWidth="400.0">
                     <center>
                         <GridPane BorderPane.alignment="CENTER">
                             <columnConstraints>
@@ -74,9 +74,6 @@
                     <right>
                         <Separator opacity="0.0" orientation="VERTICAL" prefHeight="271.0" prefWidth="17.0" BorderPane.alignment="CENTER" />
                     </right>
-                  <bottom>
-                     <TextField fx:id="status" alignment="CENTER" editable="false" opacity="0.5" prefHeight="18.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
-                  </bottom>
                 </BorderPane>
             </content>
          </Tab>
@@ -87,11 +84,12 @@
                      <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" opacity="0.5" prefHeight="117.0" prefWidth="297.0" text="Drag and Drop Files here... " textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER" />
                   </center>
                   <bottom>
-                     <Label alignment="TOP_CENTER" opacity="0.5" prefHeight="121.0" prefWidth="269.0" text="(or add files by selecting File &gt; Add files...)" BorderPane.alignment="CENTER" />
+                     <Label alignment="TOP_CENTER" opacity="0.5" prefHeight="106.0" prefWidth="269.0" text="(or add files by selecting File &gt; Add files...)" BorderPane.alignment="CENTER" />
                   </bottom>
                </BorderPane>
             </content>
          </Tab>
      </tabs>
    </TabPane>
+   <TextField fx:id="status" alignment="CENTER" editable="false" opacity="0.5" prefHeight="18.0" prefWidth="400.0" />
 </VBox>
