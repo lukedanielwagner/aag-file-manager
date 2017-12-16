@@ -217,28 +217,24 @@ public class Controller {
         imgFileTypes.add(".gif");
         imgFileTypes.add(".tiff");
 
-        for(File file : files) {
+        files.stream().filter(file -> file != null).forEach(file -> {
 
-            if( file != null) {
-
-                String fileName = file.getName();
-                String fileExt = fileName.substring(fileName.lastIndexOf("."));
+            String fileName = file.getName();
+            String fileExt = fileName.substring(fileName.lastIndexOf("."));
 
 
-                if(imgFileTypes.contains(fileExt)) {
+            if (imgFileTypes.contains(fileExt)) {
 
-                    pictureQueue.add(file);
-                    System.out.println(pictureQueue.size());
+                pictureQueue.add(file);
+                System.out.println(pictureQueue.size());
 
-                } else {
+            } else {
 
-                    fileQueue.add(file);
-
-                }
+                fileQueue.add(file);
 
             }
 
-        }
+        });
 
     }
 
