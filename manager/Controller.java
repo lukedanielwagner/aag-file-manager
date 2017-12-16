@@ -15,13 +15,15 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.io.OutputStream;
+import java.nio.file.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static java.nio.file.StandardOpenOption.CREATE_NEW;
+import static java.nio.file.StandardOpenOption.WRITE;
 
 
 public class Controller {
@@ -208,7 +210,7 @@ public class Controller {
     }
 
     /**
-     * Puts image files into pictureQueue lists and other files into fileQueue list
+     * Puts image files into pictureQueue list and other files into fileQueue list
      * @param files
      */
     private void sortFiles(List<File> files) {
@@ -248,20 +250,34 @@ public class Controller {
 
     private void moveFiles(ArrayList<File> files, ArrayList<File> pictures) throws IOException {
 
-        for(File file : files) {
+        OpenOption[] options = new OpenOption[] { WRITE, CREATE_NEW };
 
-            Files.copy(Paths.get(file.getPath()), Paths.get(claimDirPath), StandardCopyOption.REPLACE_EXISTING);
+        if(!files.isEmpty()) {
+            for (int i = 0; i < files.size(); ++i) {
 
+                File file = files.get(i);
+                Path filePath = Paths.get(file.getPath());
+                Path claimPath = Paths.get(claimDirPath);
+
+                OutputStream out = Files.newOutputStream(claimPath, options);
+                Files.copy(filePath, out);
+
+            }
         }
 
-        if(!pictureQueue.isEmpty()) {
+        if(!pictures.isEmpty()) {
 
             File pictureDir = new File(claimDirPath + "/Pictures");
             pictureDir.mkdir();
+            Path claimPath = Paths.get(claimDirPath + "/Pictures");
 
-            for(File file : pictures) {
+            for (int i = 0; i < pictures.size(); ++i) {
 
-                Files.copy(Paths.get(file.getPath()), Paths.get(new File(claimDirPath + "/Pictures").getPath()), StandardCopyOption.REPLACE_EXISTING);
+                File file = pictures.get(i);
+                Path filePath = Paths.get(file.getPath());
+
+                OutputStream out = Files.newOutputStream(claimPath, options);
+                Files.copy(filePath, out);
 
             }
 
