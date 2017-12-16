@@ -210,6 +210,10 @@ public class Controller {
 
     }
 
+    /**
+     * Puts image files into pictureQueue lists and other files into fileQueue list
+     * @param files
+     */
     private void sortFiles(List<File> files) {
 
         imgFileTypes.add(".png");
@@ -217,25 +221,32 @@ public class Controller {
         imgFileTypes.add(".gif");
         imgFileTypes.add(".tiff");
 
-        files.stream().filter(file -> file != null).forEach(file -> {
+        // Iterate through each file in the files list
+        for(int i = 0; i < files.size(); ++i) {
 
-            String fileName = file.getName();
-            String fileExt = fileName.substring(fileName.lastIndexOf("."));
+            File file = files.get(i);
 
+            if( file != null) {
 
-            if (imgFileTypes.contains(fileExt)) {
+                String fileName = file.getName();
 
-                pictureQueue.add(file);
-                System.out.println(pictureQueue.size());
+                // Iterate through imgFileTypes list
+                // to find picture file extensions
+                // then add to appropriate list
+                for(String type : imgFileTypes) {
 
-            } else {
+                    if(fileName.endsWith(type)) {
 
-                fileQueue.add(file);
+                        pictureQueue.add(file);
 
+                    } else {
+
+                        fileQueue.add(file);
+
+                    }
+                }
             }
-
-        });
-
+        }
     }
 
     private void moveFiles(ArrayList<File> files, ArrayList<File> pictures) throws IOException {
