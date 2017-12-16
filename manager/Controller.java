@@ -20,7 +20,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -60,6 +59,7 @@ public class Controller {
     private TextField status;
 
     private final File rootDir = new File("E:/Computer Science/Files");
+    String claimDirPath;
 
     final private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM.dd.yyyy");
 
@@ -119,12 +119,14 @@ public class Controller {
 
     }
 
-    void createClientDir(File root) {
+    private void createClientDir(File root) {
 
         String formattedDate = dateFormat.format(dateOfLoss.getValue());
 
         File claimDir = new File(root.getPath() + "/" +
                 lastName.getText() + " " + firstName.getText() + " " + formattedDate + " AAG " + aagNumber.getText());
+
+        claimDirPath = claimDir.getPath();
 
         try {
 
@@ -173,6 +175,7 @@ public class Controller {
         if(selectedFiles != null) {
 
             sortFiles(selectedFiles);
+            System.out.println(selectedFiles.size());
 
         }
 
@@ -225,6 +228,7 @@ public class Controller {
                 if(imgFileTypes.contains(fileExt)) {
 
                     pictureQueue.add(file);
+                    System.out.println(pictureQueue.size());
 
                 } else {
 
@@ -235,19 +239,21 @@ public class Controller {
             }
 
         }
+
     }
 
-    public void moveFiles(ArrayList<File> files, ArrayList<File> pictures) throws IOException {
+    private void moveFiles(ArrayList<File> files, ArrayList<File> pictures) throws IOException {
 
         for(File file : files) {
 
-            Files.move(Paths.get(file.getPath()), Paths.get(new File(rootDir + "/").getPath()), StandardCopyOption.REPLACE_EXISTING);
+            Files.move(Paths.get(file.getPath()), Paths.get(claimDirPath), StandardCopyOption.REPLACE_EXISTING);
 
         }
 
         if(!pictureQueue.isEmpty()) {
 
             File pictureDir = new File(rootDir + "/Pictures");
+            pictureDir.mkdir();
 
             for(File file : pictures) {
 
@@ -256,8 +262,6 @@ public class Controller {
             }
 
         }
-
-
 
     }
 
