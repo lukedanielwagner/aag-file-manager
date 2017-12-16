@@ -154,14 +154,12 @@ public class Controller {
     void clearForm(ActionEvent actionEvent) {
         System.out.println(pictureQueue);
 
-
         firstName.setText(null);
         lastName.setText(null);
         dateOfLoss.setValue(null);
         damageType.setValue(null);
         aagNumber.setText(null);
         status.setText(null);
-        flushQueue();
 
     }
 
@@ -178,7 +176,6 @@ public class Controller {
             System.out.println(selectedFiles.size());
 
         }
-
 
     }
 
@@ -226,7 +223,7 @@ public class Controller {
 
             File file = files.get(i);
 
-            if( file != null) {
+            if(file != null) {
 
                 String fileName = file.getName();
 
@@ -253,18 +250,18 @@ public class Controller {
 
         for(File file : files) {
 
-            Files.move(Paths.get(file.getPath()), Paths.get(claimDirPath), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(Paths.get(file.getPath()), Paths.get(claimDirPath), StandardCopyOption.REPLACE_EXISTING);
 
         }
 
         if(!pictureQueue.isEmpty()) {
 
-            File pictureDir = new File(rootDir + "/Pictures");
+            File pictureDir = new File(claimDirPath + "/Pictures");
             pictureDir.mkdir();
 
             for(File file : pictures) {
 
-                Files.move(Paths.get(file.getPath()), Paths.get(new File(rootDir + "/Pictures").getPath()), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(Paths.get(file.getPath()), Paths.get(new File(claimDirPath + "/Pictures").getPath()), StandardCopyOption.REPLACE_EXISTING);
 
             }
 
