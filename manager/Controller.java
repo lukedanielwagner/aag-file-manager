@@ -188,15 +188,7 @@ public class Controller {
         boolean success = false;
         if (db.hasFiles()) {
             success = true;
-            String filePath;
             sortFiles(db.getFiles());
-
-            // { TESTING
-            for (File file : db.getFiles()) {
-                filePath = file.getAbsolutePath();
-                System.out.println(filePath);
-            }
-            // } TESTING
         }
         event.setDropCompleted(success);
         event.consume();
@@ -247,7 +239,6 @@ public class Controller {
 
     private void moveFiles() throws IOException {
 
-        System.out.println("moveFiles() method!\nfileQueue size: " + fileQueue.size() + "\npictureQueue size: " + pictureQueue.size());
         if(!fileQueue.isEmpty()) {
 
 
