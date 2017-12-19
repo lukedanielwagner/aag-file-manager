@@ -31,7 +31,7 @@
     </MenuBar>
     <BorderPane onDragDropped="#handleDragDrop" prefHeight="277.0" prefWidth="400.0">
         <center>
-            <GridPane prefHeight="259.0" prefWidth="366.0" BorderPane.alignment="CENTER">
+            <GridPane prefHeight="260.0" prefWidth="366.0" BorderPane.alignment="CENTER">
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="131.0" />
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="235.0" />
