@@ -52,7 +52,7 @@
                     <TextField fx:id="firstName" promptText="First Name (Optional)" GridPane.columnIndex="1" />
                     <TextField fx:id="lastName" prefHeight="27.0" prefWidth="98.0" promptText="Last Name *" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <DatePicker fx:id="dateOfLoss" prefHeight="27.0" prefWidth="245.0" promptText="Select Date of Loss *" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                    <ComboBox fx:id="damageType" onMouseClicked="#populateDamageTypes" prefHeight="27.0" prefWidth="244.0" promptText="Select Damage Type (Optional)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <ComboBox fx:id="damageType" onMouseClicked="#populateDamageTypes" prefHeight="27.0" prefWidth="245.0" promptText="Select Damage Type (Optional)" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     <TextField fx:id="aagNumber" promptText="Enter AAG Number *" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                     <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleCreateButton" prefHeight="27.0" prefWidth="245.0" text="Create Filesystem" GridPane.columnIndex="1" GridPane.rowIndex="5">
                         <font>
