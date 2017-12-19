@@ -8,22 +8,18 @@ import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.file.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static java.nio.file.StandardOpenOption.CREATE_NEW;
-import static java.nio.file.StandardOpenOption.WRITE;
 
 
 public class Controller {
@@ -60,7 +56,7 @@ public class Controller {
     @FXML
     private TextField status;
 
-    private final File rootDir = new File("E:/Computer Science/Files");
+    private final File rootDir = new File("C:\\");
     String claimDirPath;
 
     final private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM.dd.yyyy");
@@ -83,7 +79,7 @@ public class Controller {
                 if(noFilesAlert.getResult() == ButtonType.OK) {
 
                     createFilesystem();
-                    moveFiles(fileQueue, pictureQueue);
+                    moveFiles();
 
                 } else if(noFilesAlert.getResult() == ButtonType.CANCEL) {
 
@@ -94,7 +90,7 @@ public class Controller {
             } else {
 
                 createFilesystem();
-                moveFiles(fileQueue, pictureQueue);
+                moveFiles();
 
             }
 
@@ -125,23 +121,24 @@ public class Controller {
 
         String formattedDate = dateFormat.format(dateOfLoss.getValue());
 
-        File claimDir = new File(root.getPath() + "/" +
+        File claimDir = new File(root.getPath() + "\\" +
                 lastName.getText() + " " + firstName.getText() + " " + formattedDate + " AAG " + aagNumber.getText());
 
         claimDirPath = claimDir.getPath();
 
         try {
-
-            claimDir.mkdir();
-            status.setText("Filesystem created successfully.");
+            if(!claimDir.exists()) {
+                claimDir.mkdir();
+                status.setText("File system created successfully.");
+            } else {
+                status.setText("File system already available. Proceeding...");
+            }
 
         } catch (Exception e) {
 
-            status.setText("Something went wrong. " + e);
+            status.setText("Something went wrong.");
 
         }
-
-        flushQueue();
 
     }
 
@@ -154,7 +151,6 @@ public class Controller {
 
     @FXML
     void clearForm(ActionEvent actionEvent) {
-        System.out.println(pictureQueue);
 
         firstName.setText(null);
         lastName.setText(null);
@@ -162,6 +158,7 @@ public class Controller {
         damageType.setValue(null);
         aagNumber.setText(null);
         status.setText(null);
+        flushQueue();
 
     }
 
@@ -176,38 +173,36 @@ public class Controller {
 
             sortFiles(selectedFiles);
             System.out.println(selectedFiles.size());
+            for(File f : selectedFiles) {
+                System.out.println(f.getName());
+            }
 
         }
 
     }
 
     @FXML
-    void handleDragOver(DragEvent dragEvent) {
+    void handleDragDrop(DragEvent event) throws FileNotFoundException {
 
-        if(dragEvent.getDragboard().hasFiles()) {
+        Dragboard db = event.getDragboard();
+        boolean success = false;
+        if (db.hasFiles()) {
+            success = true;
+            String filePath;
+            sortFiles(db.getFiles());
 
-            dragEvent.acceptTransferModes(TransferMode.MOVE);
-
+            // { TESTING
+            for (File file : db.getFiles()) {
+                filePath = file.getAbsolutePath();
+                System.out.println(filePath);
+            }
+            // } TESTING
         }
-
-        dragEvent.consume();
+        event.setDropCompleted(success);
+        event.consume();
 
     }
 
-    @FXML
-    void handleDragDrop(DragEvent dragEvent) throws FileNotFoundException {
-
-        Dragboard dragboard = dragEvent.getDragboard();
-        List<File> droppedFiles = dragboard.getFiles();
-
-        if(dragboard.hasFiles()) {
-
-            sortFiles(droppedFiles);
-            System.out.print(pictureQueue + "\n" + fileQueue);
-
-        }
-
-    }
 
     /**
      * Puts image files into pictureQueue list and other files into fileQueue list
@@ -217,8 +212,10 @@ public class Controller {
 
         imgFileTypes.add(".png");
         imgFileTypes.add(".jpeg");
+        imgFileTypes.add(".jpg");
         imgFileTypes.add(".gif");
         imgFileTypes.add(".tiff");
+        imgFileTypes.add(".bmp");
 
         // Iterate through each file in the files list
         for(int i = 0; i < files.size(); ++i) {
@@ -232,56 +229,68 @@ public class Controller {
                 // Iterate through imgFileTypes list
                 // to find picture file extensions
                 // then add to appropriate list
+                boolean added = false;
                 for(String type : imgFileTypes) {
-
                     if(fileName.endsWith(type)) {
-
                         pictureQueue.add(file);
-
-                    } else {
-
-                        fileQueue.add(file);
-
+                        added = true;
                     }
+                }
+                if(added == false) {
+                   fileQueue.add(file);
                 }
             }
         }
+        System.out.println("Sorted files. \nfileQueue size: " + fileQueue.size() + "\npictureQueue size: " + pictureQueue.size());
+        status.setText("Loaded " + pictureQueue.size() + " pictures and " + fileQueue.size() + " other files successfully.");
     }
 
-    private void moveFiles(ArrayList<File> files, ArrayList<File> pictures) throws IOException {
+    private void moveFiles() throws IOException {
 
-        OpenOption[] options = new OpenOption[] { WRITE, CREATE_NEW };
+        System.out.println("moveFiles() method!\nfileQueue size: " + fileQueue.size() + "\npictureQueue size: " + pictureQueue.size());
+        if(!fileQueue.isEmpty()) {
 
-        if(!files.isEmpty()) {
-            for (int i = 0; i < files.size(); ++i) {
 
-                File file = files.get(i);
-                Path filePath = Paths.get(file.getPath());
-                Path claimPath = Paths.get(claimDirPath);
+            for (int i = 0; i < fileQueue.size(); ++i) {
 
-                OutputStream out = Files.newOutputStream(claimPath, options);
-                Files.copy(filePath, out);
+                File file = fileQueue.get(i);
+                Path filePath = Paths.get(file.getAbsolutePath());
+                Path claimPath = Paths.get(claimDirPath + "\\" + file.getName());
 
+                Path temp = Files.copy(filePath, claimPath);
+
+                if(temp != null) {
+                    status.setText("Files migrated successfully.");
+                    System.out.println("file migration: success.");
+                }
             }
         }
 
-        if(!pictures.isEmpty()) {
+        if(!pictureQueue.isEmpty()) {
 
-            File pictureDir = new File(claimDirPath + "/Pictures");
-            pictureDir.mkdir();
-            Path claimPath = Paths.get(claimDirPath + "/Pictures");
+            File pictureDir = new File(claimDirPath + "\\Pictures");
+            if(!pictureDir.exists()) {
+                pictureDir.mkdir();
+            }
 
-            for (int i = 0; i < pictures.size(); ++i) {
 
-                File file = pictures.get(i);
-                Path filePath = Paths.get(file.getPath());
+            for (int i = 0; i < pictureQueue.size(); ++i) {
 
-                OutputStream out = Files.newOutputStream(claimPath, options);
-                Files.copy(filePath, out);
+                File file = pictureQueue.get(i);
+                Path filePath = Paths.get(file.getAbsolutePath());
+                Path picturePath = Paths.get(pictureDir.getAbsolutePath() + "\\" + file.getName());
 
+                Path temp = Files.copy(filePath, picturePath);
+
+                if(temp != null) {
+                    status.setText("Files migrated successfully.");
+                    System.out.println("picture migration: success.");
+                }
             }
 
         }
+
+        flushQueue();
 
     }
 

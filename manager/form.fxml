@@ -80,7 +80,7 @@
          </Tab>
        <Tab text="Files">
             <content>
-               <BorderPane onDragDetected="#handleDragOver" onDragDropped="#handleDragDrop" prefHeight="200.0" prefWidth="200.0">
+               <BorderPane onDragDropped="#handleDragDrop" prefHeight="200.0" prefWidth="200.0">
                   <center>
                      <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" opacity="0.5" prefHeight="117.0" prefWidth="297.0" text="Drag and Drop Files here... " textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER" />
                   </center>
