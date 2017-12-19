@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b4814d02-4e92-4fc7-b6f4-37bd6069efff" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/aag-file-manager/manager/Controller.class" afterPath="$PROJECT_DIR$/out/production/aag-file-manager/manager/Controller.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="aag-file-manager.iws" />
@@ -662,7 +661,14 @@
       <option name="project" value="LOCAL" />
       <updated>1513702532972</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Remove tabs">
+      <created>1513703189178</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1513703189178</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -716,7 +722,8 @@
     <MESSAGE value="Develop moveFiles method" />
     <MESSAGE value="Update Code [EXTREMELY UNSTABLE]" />
     <MESSAGE value="Create New Branch" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create New Branch" />
+    <MESSAGE value="Remove tabs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove tabs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
